@@ -12,7 +12,7 @@ const sessionStore = new Map<string, ReturnType<typeof model.startChat>>();
 
 export async function POST(req: NextRequest) {
   try {
-    const { sessionId, query } = await req.json();
+    const { sessionId, query } = await req.json() as { sessionId?: string; query?: string };
 
     if (!sessionId || !query) {
       return NextResponse.json({ message: "Missing sessionId or query" }, { status: 400 });
@@ -23,9 +23,8 @@ export async function POST(req: NextRequest) {
       chat = model.startChat({
         tools: [
           {
-            // ts-expect-error - Using google_search as specified by the API error
             google_search: {},
-          },
+          } as any,
         ],
       });
       sessionStore.set(sessionId, chat);
@@ -36,7 +35,7 @@ export async function POST(req: NextRequest) {
     const text = response.text();
     const formatted = await formatResponseToMarkdown(text);
 
-    const metadata = response.candidates?.[0]?.groundingMetadata as GroundingMetadata;
+    const metadata = response.candidates?.[0]?.groundingMetadata as GroundingMetadata | undefined;
     const sourceMap = new Map<string, { title: string; url: string; snippet: string }>();
 
     if (metadata?.groundingChunks && metadata?.groundingSupports) {
@@ -67,11 +66,11 @@ export async function POST(req: NextRequest) {
       summary: formatted,
       sources: Array.from(sourceMap.values()),
     });
-  } catch (error) {
+  } catch (error: unknown) {
     console.error("Error processing search request:", error);
-    return NextResponse.json({ 
-      message: "Failed to process search request", 
-      error: error instanceof Error ? error.message : String(error) 
+    return NextResponse.json({
+      message: "Failed to process search request",
+      error: error instanceof Error ? error.message : String(error),
     }, { status: 500 });
   }
 }
@@ -83,23 +82,20 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ message: "Missing query" }, { status: 400 });
     }
 
-    // Create a chat with the google_search tool configuration
     const chat = model.startChat({
       tools: [
         {
-          // ts-expect-error - Using google_search as specified by the API error
           google_search: {},
-        } ,
+        } as any,
       ],
     });
 
-    // Send the query to the model
     const result = await chat.sendMessage(query);
     const response = await result.response;
     const text = response.text();
     const formatted = await formatResponseToMarkdown(text);
 
-    const metadata = response.candidates?.[0]?.groundingMetadata as GroundingMetadata;
+    const metadata = response.candidates?.[0]?.groundingMetadata as GroundingMetadata | undefined;
     const sourceMap = new Map<string, { title: string; url: string; snippet: string }>();
 
     if (metadata?.groundingChunks && metadata?.groundingSupports) {
@@ -130,11 +126,11 @@ export async function GET(req: NextRequest) {
       summary: formatted,
       sources: Array.from(sourceMap.values()),
     });
-  } catch (error) {
+  } catch (error: unknown) {
     console.error("Error processing search request:", error);
-    return NextResponse.json({ 
-      message: "Failed to process search request", 
-      error: error instanceof Error ? error.message : String(error) 
+    return NextResponse.json({
+      message: "Failed to process search request",
+      error: error instanceof Error ? error.message : String(error),
     }, { status: 500 });
   }
 }

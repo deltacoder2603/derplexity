@@ -3,7 +3,7 @@
 import { useState, useEffect, Suspense } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import Link from "next/link"
-import { ArrowLeft, BookOpenText } from "lucide-react"
+import { BookOpenText } from "lucide-react"
 import { motion } from "framer-motion"
 import { SourceCard } from "@/components/source-card"
 import { SearchResult } from "@/components/search-result"

@@ -17,7 +17,7 @@ export async function POST(req: NextRequest) {
     chat = model.startChat({
       tools: [
         {
-          // @ts-ignore – not typed in SDK
+          // @ts-expect-error – not typed in SDK
           google_search: {},
         },
       ],

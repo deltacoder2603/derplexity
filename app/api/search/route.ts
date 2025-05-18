@@ -5,9 +5,9 @@ import {
   GroundingChunk,
   GroundingMetadata,
   GroundingSupport,
+  GoogleSearchRetrievalTool
 } from "@google/generative-ai";
 
-// Map to store chat sessions
 const sessionStore = new Map<string, ReturnType<typeof model.startChat>>();
 
 export async function POST(req: NextRequest) {
@@ -24,7 +24,7 @@ export async function POST(req: NextRequest) {
         tools: [
           {
             google_search: {},
-          } as any,
+          } as GoogleSearchRetrievalTool,
         ],
       });
       sessionStore.set(sessionId, chat);
@@ -86,7 +86,7 @@ export async function GET(req: NextRequest) {
       tools: [
         {
           google_search: {},
-        } as any,
+        } as GoogleSearchRetrievalTool,
       ],
     });
 

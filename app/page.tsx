@@ -2,7 +2,6 @@
 
 import { SearchBox } from "@/components/search-box"
 import { ModeToggle } from "@/components/mode-toggle"
-import { Logo } from "@/components/logo"
 import Image from "next/image";
 
 export default function Home() {
@@ -42,7 +41,7 @@ export default function Home() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Star My Repo's on GitHub
+              Star My Repo&aposs on GitHub
             </a>
           </div>
         </div>

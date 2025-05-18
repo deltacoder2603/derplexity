@@ -1,8 +1,12 @@
+<div align="center">
+  <img src="/public/logo.png" alt="Derplexity Logo" width="150" height="150">
+</div>
+
 # Derplexity
 
 Derplexity is a modern web application that provides an AI-powered search experience using Google's Gemini 2.0 model. It allows users to ask questions and receive intelligent answers with cited sources.
 
-![Derplexity Logo](/public/logo.png)
+[Live Demo](https://derplexity.vercel.app/)
 
 ## Features
 

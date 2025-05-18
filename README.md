@@ -83,10 +83,6 @@ yarn build
 
 For more deployment options, check out the [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying).
 
-## License
-
-MIT
-
 ## Author
 
 [deltacoder2603](https://github.com/deltacoder2603)

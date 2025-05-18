@@ -43,7 +43,7 @@ export default function Search() {
         abortControllerRef.current.abort()
       }
     }
-  }, [query])
+  }, [query, router])
 
   const fetchSearchResults = async (searchQuery: string) => {
     setLoading(true)
@@ -71,9 +71,11 @@ export default function Search() {
 
       const result = await response.json()
       setData(result)
-    } catch (err: any) {
-      if (err.name === "AbortError") return
-      console.error(err)
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        if (err.name === "AbortError") return
+        console.error(err)
+      }
       setError("Failed to fetch search results")
     } finally {
       setLoading(false)
@@ -106,9 +108,11 @@ export default function Search() {
 
       const result = await response.json()
       setData(result)
-    } catch (err: any) {
-      if (err.name === "AbortError") return
-      console.error(err)
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        if (err.name === "AbortError") return
+        console.error(err)
+      }
       setError("Failed to fetch follow-up response")
     } finally {
       setLoading(false)
@@ -139,7 +143,7 @@ export default function Search() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3 }}
         >
-          "{query}"
+          &quot;{query}&quot;
         </motion.h1>
 
         {/* Sources Section */}

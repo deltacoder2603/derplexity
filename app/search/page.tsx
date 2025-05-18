@@ -11,6 +11,7 @@ import { FollowUpForm } from "@/components/follow-up-form"
 import { SearchResponse, Source } from "@/lib/types"
 import { ModeToggle } from "@/components/mode-toggle"
 import { SearchBox } from "@/components/search-box"
+import Image from "next/image"
 
 function SearchContent() {
   const router = useRouter()
@@ -87,8 +88,7 @@ function SearchContent() {
 
   return (
     <div className="min-h-screen p-4 md:p-8">
-      <ModeToggle />
-      
+
       <div className="max-w-6xl mx-auto">
         {/* Header with back button and search */}
         <div className="flex items-center gap-4 mb-8">
@@ -96,13 +96,19 @@ function SearchContent() {
             href="/"
             className="flex items-center justify-center w-10 h-10 rounded-full bg-background hover:bg-muted transition-colors"
           >
-            <ArrowLeft className="h-5 w-5" />
+            <Image 
+              src="/logo.png" 
+              width={80} 
+              height={80} 
+              alt="Logo" 
+            />
             <span className="sr-only">Back to home</span>
           </Link>
 
           <div className="flex-1">
             <SearchBox variant="results" initialQuery={query} />
           </div>
+          <ModeToggle />
         </div>
 
         {/* Query display */}

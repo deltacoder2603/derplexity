@@ -112,7 +112,7 @@ export default function Search() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3 }}
         >
-          "{query}"
+          &quot{query}&quot
         </motion.h1>
 
         {/* Sources section */}

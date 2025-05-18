@@ -23,9 +23,9 @@ export async function POST(req: NextRequest) {
       chat = model.startChat({
         tools: [
           {
-            // @ts-ignore - Using google_search as specified by the API error
+            // ts-expect-error - Using google_search as specified by the API error
             google_search: {},
-          } as any,
+          },
         ],
       });
       sessionStore.set(sessionId, chat);

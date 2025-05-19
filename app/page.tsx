@@ -41,7 +41,7 @@ export default function Home() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Star My Repo&aposs on GitHub
+              Star My Repos on GitHub
             </a>
           </div>
         </div>
